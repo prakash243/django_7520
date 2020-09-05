@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <script src="{% static 'jquery-3.5.0.min.js' %}"></script>
+    <title>To Do app</title>
+</head>
+<body>
+    <div class="container">
+        <h1>TO DO List</h1>
+    <form action="{% url 'addtodo' %}" method="POST">
+        {% csrf_token %}
+
+        <p>Add Todo : {{form.text}} Mark to Complete : {{form.complete}} <input type="submit" class="btn btn-success" value="Add New"> </p>
+    <hr>
+        <a href="{% url 'deleteCompleted' %}"><button class="btn btn-danger" type="button">Delete Completed</button></a>
+        <a href="{% url 'deleteAll' %}"><button class="btn btn-danger" type="button">Delete All</button></a>
+        
+    </form>
+
+    <br><br><hr>
+    <ul class="list-group t20">
+        {% for todo in todo_list %}
+            {% if todo.complete %}
+            <li class="list-group-item todo-completed">{{todo.text}} <span><a href="delete/{{todo.id}}">Delete</a></span> <span><a href="update/{{todo.id}}">Update</a></span></li>
+            
+            {% else %}
+            
+            <li class="list-group-item todo-completed"><a href="completeTodo/{{todo.pk}}">{{todo.text }} <span><a href="delete/{{todo.pk}}">Delete</a></span> <span><a href="update/{{todo.id}}">Update</a></span></li>
+            
+            {% endif %}
+            
+        {% endfor %}
+    </ul>
+    </div>
+
+</body>
+</html>

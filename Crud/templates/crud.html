@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="" content="">
+    <title>CRUD</title>
+  </head>
+  <body>
+
+    <h2 class="">Add/update</h2>
+    <form action="update/" method="POST">
+      {% csrf_token %}
+      Enter name : <input type="text" name="name" id="" value="{{p.name}}" />
+      
+      <input type="hidden" name="id" id="" value="{{p.id}}" />
+      
+      <input type="submit" name="" id="" value="Save" />
+    </form>
+    
+    
+    <br /> <br />
+    <hr />
+    {% for i in persons %}
+    {{i.name}}
+    {{i.id}} <span><a href="edit/{{i.id}}/">Edit</a></span>
+    
+    <span><a href="delete/{{i.id}}/">Delete</a></span>
+    
+    <span><a href="?id={{i.id}}">Update</a></span>
+    
+    <br />
+    
+    {% endfor %}
+    
+    <br /><br /><hr />
+    
+    <a href="/admin">Admin</a>
+  </body>
+</html>
